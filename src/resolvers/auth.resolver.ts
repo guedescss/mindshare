@@ -4,10 +4,13 @@ import { RegisterOutput } from "../dtos/output/auth.output";
 
 @Resolver()
 export class AuthResolver {
+    constructor(private readonly authService: AuthService) {}
+        
     @Mutation(() => RegisterOutput)
     async register(
         @Arg('data', () => RegisterInput) data: RegisterInput
     ): Promise<RegisterOutput> {
+        return this.authService.register(data)
 
     }
 }

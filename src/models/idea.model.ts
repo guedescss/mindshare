@@ -15,7 +15,7 @@ export class IdeaModel {
     @Field(() => String, { nullable: true })
     authorId!: string
 
-    @Field(() => String)
+    @Field(() => UserModel, { nullable: true })
     author?: UserModel
 
     @Field(() => GraphQLISODateTime)

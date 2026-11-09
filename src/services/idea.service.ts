@@ -32,6 +32,14 @@ export class IdeaService {
         })
     }
 
+    async findIdeaById(id: string){
+        return prismaClient.idea.findUnique({
+            where: {
+                id,
+            },
+        })
+    }
+
     async updateIdea(id: string, data:UpdateIdeaInput){
         if(!id) throw new Error('Id da ideia obrigatório!')
             const idea = await prismaClient.idea.findUnique({

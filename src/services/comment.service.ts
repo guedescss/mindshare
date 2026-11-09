@@ -19,7 +19,14 @@ export class CommentService {
             authorId,
             content: data.content,
         },
-    })
-            
+    })              
+}
+
+    async listByIdea(ideaId: string){
+        return prismaClient.comment.findMany({
+            where: {
+                ideaId,
+            },
+        })
     }
 }

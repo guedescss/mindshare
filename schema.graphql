@@ -37,6 +37,8 @@ scalar DateTimeISO
 type IdeaModel {
   author: UserModel
   authorId: String
+  comment: [CommentModel!]
+  comments: [CommentModel!]!
   createdAt: DateTimeISO!
   description: String
   id: ID!

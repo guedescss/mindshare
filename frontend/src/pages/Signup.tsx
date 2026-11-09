@@ -11,14 +11,41 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import logo from "@/assets/logo.svg"
 import { Link } from "react-router-dom"
+import { useAuthStore } from "@/stores/auth"
+import { toast } from "sonner"
 
 export function Signup() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const signup = useAuthStore((state) => state.signup)
 
 
-  const handleSubmit = async (e: React.FormEvent) => {}
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const signupMutate = await signup({
+        name,
+        email,
+        password,
+      })
+      if (signupMutate) {
+        toast.success("Cadastro realizado com sucesso!")
+      } else {
+        toast.error("Não foi possível realizar o cadastro")
+      }
+    } catch (error: unknown) {
+      toast.error(
+        error instanceof Error ? error.message : "Erro ao realizar o cadastro"
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="flex items-center min-h-[calc(100vh-4rem)] justify-center flex-col gap-6">
       <img src={logo} className="w-64 h-22" />
@@ -34,6 +61,7 @@ export function Signup() {
             <div className="space-y-2">
               <Label htmlFor="email">Nome</Label>
               <Input
+                className="h-11 rounded-md border-input bg-background"
                 id="name"
                 placeholder="Seu nome"
                 value={name}
@@ -44,6 +72,7 @@ export function Signup() {
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
+                className="h-11 rounded-md border-input bg-background"
                 id="email"
                 type="email"
                 placeholder="email@email.com"
@@ -55,6 +84,7 @@ export function Signup() {
             <div className="space-y-2">
               <Label htmlFor="email">Password</Label>
               <Input
+                className="h-11 rounded-md border-input bg-background"
                 id="password"
                 type="password"
                 placeholder="*******"
@@ -63,8 +93,12 @@ export function Signup() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full">
-              Cadastrar
+            <Button
+              type="submit"
+              className="h-11 w-full cursor-pointer rounded-md"
+              disabled={loading}
+            >
+              {loading ? "Cadastrando..." : "Cadastrar"}
             </Button>
           </form>
         </CardContent>
@@ -77,7 +111,11 @@ export function Signup() {
           <CardDescription>Entre agora mesmo</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button variant="outline" className="w-full" asChild>
+          <Button
+            variant="outline"
+            className="h-11 w-full cursor-pointer rounded-md"
+            asChild
+          >
             <Link to="/login">Acessar conta</Link>
           </Button>
         </CardContent>

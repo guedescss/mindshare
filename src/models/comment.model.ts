@@ -8,7 +8,7 @@ export class CommentModel {
     @Field(() => ID)
     id!: string
 
-    @Field(() => ID)
+    @Field(() => String)
     content!: string
 
     @Field(() => String)
@@ -21,7 +21,7 @@ export class CommentModel {
     author?: UserModel
 
     @Field(() => IdeaModel, { nullable: true })
-    Idea?: IdeaModel
+    idea?: IdeaModel
 
     @Field(() => GraphQLISODateTime)
     createdAt!: Date

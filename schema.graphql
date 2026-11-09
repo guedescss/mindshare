@@ -4,13 +4,12 @@
 # -----------------------------------------------
 
 type CommentModel {
-  Idea: IdeaModel
   author: UserModel
   authorId: String!
-  content: ID!
+  content: String!
   createdAt: DateTimeISO!
   id: ID!
-  idea: IdeaModel!
+  idea: IdeaModel
   ideaId: String!
   updatedAt: DateTimeISO!
 }

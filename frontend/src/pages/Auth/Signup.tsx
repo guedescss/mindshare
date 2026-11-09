@@ -22,10 +22,10 @@ export function Signup() {
 
   const signup = useAuthStore((state) => state.signup)
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+
     try {
       const signupMutate = await signup({
         name,
@@ -34,10 +34,8 @@ export function Signup() {
       })
       if (signupMutate) {
         toast.success("Cadastro realizado com sucesso!")
-      } else {
-        toast.error("Não foi possível realizar o cadastro")
       }
-    } catch (error: unknown) {
+    } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Erro ao realizar o cadastro"
       )
@@ -47,58 +45,54 @@ export function Signup() {
   }
 
   return (
-    <div className="flex items-center min-h-[calc(100vh-4rem)] justify-center flex-col gap-6">
-      <img src={logo} className="w-64 h-22" />
-      <Card className="w-full max-w-md rounded-xl">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">Crie sua conta</CardTitle>
-          <CardDescription>
+    <div className="flex items-center min-h-[calc(100vh-4rem)] justify-center flex-col gap-8">
+      <img src={logo} className="h-auto w-80" />
+      <Card className="w-full max-w-lg rounded-xl">
+        <CardHeader className="p-8">
+          <CardTitle className="text-3xl font-bold">Crie sua conta</CardTitle>
+          <CardDescription className="text-base">
             Informe seu nome, e-email e senha de acesso
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <CardContent className="p-8 pt-0">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="email">Nome</Label>
+              <Label htmlFor="email" className="text-base">Nome</Label>
               <Input
-                className="h-11 rounded-md border-input bg-background"
                 id="name"
                 placeholder="Seu nome"
+                className="h-11"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-base">Email</Label>
               <Input
-                className="h-11 rounded-md border-input bg-background"
                 id="email"
                 type="email"
                 placeholder="email@email.com"
+                className="h-11"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Password</Label>
+              <Label htmlFor="email" className="text-base">Password</Label>
               <Input
-                className="h-11 rounded-md border-input bg-background"
                 id="password"
                 type="password"
                 placeholder="*******"
+                className="h-11"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <Button
-              type="submit"
-              className="h-11 w-full cursor-pointer rounded-md"
-              disabled={loading}
-            >
-              {loading ? "Cadastrando..." : "Cadastrar"}
+            <Button type="submit" className="h-11 w-full text-base" disabled={loading}>
+              Cadastrar
             </Button>
           </form>
         </CardContent>
@@ -111,14 +105,11 @@ export function Signup() {
           <CardDescription>Entre agora mesmo</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button
-            variant="outline"
-            className="h-11 w-full cursor-pointer rounded-md"
-            asChild
-          >
+          <Button variant="outline" className="w-full" asChild>
             <Link to="/login">Acessar conta</Link>
           </Button>
         </CardContent>
       </Card>
     </div>
-  )}
+  )
+}

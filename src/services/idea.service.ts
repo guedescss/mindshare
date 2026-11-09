@@ -24,7 +24,7 @@ export class IdeaService {
             },
         })
 
-        if(!findIdea) throw new Error ('Idea não encontrada')
+        if(!findIdea) throw new Error ('Ideia não encontrada')
             return prismaClient.idea.delete({
             where: {
                 id,
@@ -57,4 +57,5 @@ export class IdeaService {
                     }
                 })
     }
+    
 }

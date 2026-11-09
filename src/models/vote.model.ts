@@ -9,12 +9,15 @@ export class VoteModel {
     id!: string
 
     @Field(() => String)
-    IdeaId!: String
+    userId!: string
+    
+    @Field(() => String)
+    ideaId!: string
 
-    @Field(() => UserModel)
-    UserId!: UserModel
-
-    @Field(() => IdeaModel)
-    Idea!: IdeaModel
+    @Field(() => UserModel, { nullable: true })
+    user?: UserModel
+    
+    @Field(() => IdeaModel, { nullable: true })
+    idea?: IdeaModel
 
 }

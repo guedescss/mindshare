@@ -12,16 +12,16 @@ export class CommentModel {
     content!: string
 
     @Field(() => String)
-    authorId!: String
+    authorId!: string
 
     @Field(() => String)
-    ideaId!: String
+    ideaId!: string
 
     @Field(() => UserModel, { nullable: true })
-    author?: UserModel
+    author?: UserModel | null
 
     @Field(() => IdeaModel, { nullable: true })
-    idea?: IdeaModel
+    idea?: IdeaModel | null
 
     @Field(() => GraphQLISODateTime)
     createdAt!: Date

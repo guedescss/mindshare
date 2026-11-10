@@ -12,10 +12,10 @@ export class IdeaModel {
     title!: string
 
     @Field(() => Number, { nullable: true })
-    countVotes?: number
+    countVotes?: number | null
 
     @Field(() => String, { nullable: true })
-    description?: string
+    description?: string | null
 
     @Field(() => String, { nullable: true })
     authorId!: string
@@ -27,7 +27,7 @@ export class IdeaModel {
     comment?: CommentModel[]
 
     @Field(() => [VoteModel], { nullable: true})
-    votes?: VoteModel[]
+    votes?: VoteModel[] 
 
     @Field(() => GraphQLISODateTime)
     createdAt!: Date

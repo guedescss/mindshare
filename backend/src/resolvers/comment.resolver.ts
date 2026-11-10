@@ -26,7 +26,7 @@ export class CommentResolver {
     }
 
     @FieldResolver(() => IdeaModel)
-    async idea(@Root() comment: CommentModel): Promise<IdeaModel>{     
+    async idea(@Root() comment: CommentModel): Promise<IdeaModel | null>{     
     return this.ideaService.findIdeaById(comment.ideaId)
     }
 

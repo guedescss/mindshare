@@ -26,7 +26,7 @@ export class UserModel {
     email!: string
 
     @Field(() => String, { nullable: true })
-    password?: string
+    password?: string | null
 
     @Field(() => Role, { nullable: true })
     role?: string

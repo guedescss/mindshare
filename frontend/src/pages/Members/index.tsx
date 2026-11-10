@@ -1,4 +1,4 @@
-import { Plus, Search } from "lucide-react"
+import { Crown, Plus, Search, UserRound } from "lucide-react"
 import { Page } from "../../components/Page"
 import { Label } from "../../components/ui/label"
 import { Input } from "../../components/ui/input"
@@ -28,6 +28,10 @@ export function Members() {
     { fetchPolicy: "network-only" }
   )
   const members = data?.listUsers ?? []
+  const adminCount = members.filter(
+    (member) => member.role === "admin" || member.role === "owner"
+  ).length
+  const memberCount = members.length - adminCount
   const canManageMembers = Boolean(currentUserId)
 
   useEffect(() => {
@@ -61,10 +65,19 @@ export function Members() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-medium text-purple-600">Usuários</h1>
-            <p className="text-muted-foreground">
-              Gerencie os membros e suas permissões
-            </p>
+            <h1 className="mb-1 text-3xl font-medium text-purple-600">Usuários</h1>
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1 rounded-full bg-indigo-200 px-2 py-0.5 text-xs text-indigo-900">
+                <Crown className="h-3.5 w-3.5" />
+                <span className="font-bold">{adminCount}</span>{" "}
+                {adminCount === 1 ? "admin" : "admins"}
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-purple-200 px-2 py-0.5 text-xs text-purple-900">
+                <UserRound className="h-3.5 w-3.5" />
+                <span className="font-bold">{memberCount}</span>{" "}
+                {memberCount === 1 ? "membro" : "membros"}
+              </span>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-4 justify-end">
@@ -83,10 +96,13 @@ export function Members() {
               </div>
             </div>
             {canManageMembers && (
-              <Button onClick={handleAddUser}>
-                <Plus className="mr-2 h-4 w-4" />
-                Novo usuário
-              </Button>
+              <>
+                <div className="mx-2 h-8 w-px bg-gray-300" />
+                <Button onClick={handleAddUser}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Novo usuário
+                </Button>
+              </>
             )}
           </div>
         </div>

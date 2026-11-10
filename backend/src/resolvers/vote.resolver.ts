@@ -23,7 +23,7 @@ export class VoteResolver {
     }
 
     @FieldResolver(() => IdeaModel)
-    async idea(@Root() vote: VoteModel): Promise<IdeaModel> {
+    async idea(@Root() vote: VoteModel): Promise<IdeaModel | null> {
         return this.ideaService.findIdeaById(vote.ideaId)
     }
 

@@ -16,7 +16,8 @@ import cors from "cors";
 async function bootstrap(){
     const app = express() 
     const allowedOrigins = [
-        process.env.FRONT_URL?.replace(/\/+$/, ""),
+        process.env.FRONT_URL?.trim().replace(/\/+$/, ""),
+        "https://mindshare-sable.vercel.app",
         "http://localhost:5173",
         "https://studio.apollographql.com",
     ].filter((origin): origin is string => Boolean(origin))

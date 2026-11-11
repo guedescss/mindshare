@@ -17,7 +17,7 @@ async function bootstrap(){
     const app = express() 
     app.use(
     cors({
-    origin: "http://localhost:5173",
+    origin: [process.env.FRONT_URL, "http://localhost:5173"].filter((origin): origin is string => Boolean(origin)),
     credentials: true,
     })
 );
@@ -40,9 +40,9 @@ async function bootstrap(){
 )
 
 app.listen({
-    port: 4000
+    port: Number(process.env.PORT) || 4000
 }, () => {
-    console.log(`Servidor iniciado na porta 4000`)
+    console.log(`Servidor iniciado na porta ${Number(process.env.PORT) || 4000}`)
 })
 }
 

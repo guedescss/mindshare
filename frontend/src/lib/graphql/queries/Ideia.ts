@@ -12,6 +12,7 @@ export const LIST_IDEAS = gql`
           id
           name
           email
+          role
         }
         countVotes
         comments {

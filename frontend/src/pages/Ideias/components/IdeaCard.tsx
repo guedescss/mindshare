@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MessageSquare, ThumbsUp } from "lucide-react"
+import { Crown, MessageSquare, ThumbsUp, UserRound } from "lucide-react"
 import type { Idea } from "@/types"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { formatRelativeDate } from "@/lib/utils"
@@ -17,16 +17,40 @@ export function IdeaCard({ idea, onClick }: IdeaCardProps) {
       className="hover:shadow-lg transition-shadow cursor-pointer"
     >
       <CardHeader>
-        <CardTitle className="line-clamp-2">
+        <CardTitle>
           <div className="flex items-center gap-2">
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-8 w-8 shrink-0">
               <AvatarFallback className="bg-zinc-950 text-primary-foreground text-sm">
                 {idea.author?.name?.charAt(0)}
               </AvatarFallback>
             </Avatar>
-            <span className="text-sm font-medium line-clamp-1">
-              {idea.author?.name || "Usuário"}
-            </span>
+            <div className="flex min-w-0 flex-col items-center justify-center gap-1">
+              <span className="block text-center text-sm font-medium leading-4 line-clamp-1">
+                {idea.author?.name || "Usuário"}
+              </span>
+              {idea.author?.role && (
+                <span
+                  className={`inline-flex h-3.5 items-center gap-1 rounded-full px-1.5 text-[10px] font-medium leading-none ${
+                    idea.author.role === "owner" || idea.author.role === "admin"
+                      ? "bg-purple-100 text-purple-700"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {idea.author.role === "owner" || idea.author.role === "admin" ? (
+                    <Crown className="h-2.5 w-2.5" />
+                  ) : (
+                    <UserRound className="h-2.5 w-2.5" />
+                  )}
+                  {idea.author.role === "owner"
+                    ? "Owner"
+                    : idea.author.role === "admin"
+                      ? "Admin"
+                      : idea.author.role === "viewer"
+                        ? "Visualizador"
+                        : "Membro"}
+                </span>
+              )}
+            </div>
           </div>
         </CardTitle>
       </CardHeader>

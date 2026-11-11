@@ -97,15 +97,15 @@ export function Signup() {
           </form>
         </CardContent>
       </Card>
-      <Card className="w-full max-w-md rounded-xl">
-        <CardHeader>
+      <Card className="w-full max-w-lg rounded-xl">
+        <CardHeader className="p-8">
           <CardTitle className="text-2xl font-bold">
             Já tem uma conta?
           </CardTitle>
-          <CardDescription>Entre agora mesmo</CardDescription>
+          <CardDescription className="text-base">Entre agora mesmo</CardDescription>
         </CardHeader>
-        <CardContent>
-          <Button variant="outline" className="w-full" asChild>
+        <CardContent className="px-8 pb-5 pt-0">
+          <Button variant="outline" className="h-11 w-full text-base" asChild>
             <Link to="/login">Acessar conta</Link>
           </Button>
         </CardContent>

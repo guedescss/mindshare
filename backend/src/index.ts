@@ -15,13 +15,15 @@ import cors from "cors";
 
 async function bootstrap(){
     const app = express() 
-    app.use(
-    cors({
-    origin: [
-        process.env.FRONT_URL,
+    const allowedOrigins = [
+        process.env.FRONT_URL?.replace(/\/+$/, ""),
         "http://localhost:5173",
         "https://studio.apollographql.com",
-    ].filter((origin): origin is string => Boolean(origin)),
+    ].filter((origin): origin is string => Boolean(origin))
+
+    app.use(
+    cors({
+    origin: allowedOrigins,
     credentials: true,
     })
 );

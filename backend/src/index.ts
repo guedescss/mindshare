@@ -17,7 +17,11 @@ async function bootstrap(){
     const app = express() 
     app.use(
     cors({
-    origin: [process.env.FRONT_URL, "http://localhost:5173"].filter((origin): origin is string => Boolean(origin)),
+    origin: [
+        process.env.FRONT_URL,
+        "http://localhost:5173",
+        "https://studio.apollographql.com",
+    ].filter((origin): origin is string => Boolean(origin)),
     credentials: true,
     })
 );
